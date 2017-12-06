@@ -22,7 +22,7 @@ public class RunVirtualCommunication extends Thread {
     }
 
     @Override
-    public final void run(){
+    public final void run() {
 
         int i=0;
 

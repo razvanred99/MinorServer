@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXTextField;
 import it.minoranza.commons.Station;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -16,7 +17,7 @@ public class Main implements Initializable {
     private JFXTextField txfCity;
 
     @FXML
-    private VBox container;
+    private BorderPane container;
 
     @FXML
     private JFXComboBox comboStations;

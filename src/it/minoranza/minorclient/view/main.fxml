@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.geometry.Insets?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
 <BorderPane xmlns:fx="http://javafx.com/fx" fx:controller="it.minoranza.minorclient.control.Main">
     <padding>
         <Insets topRightBottomLeft="7"/>
@@ -23,8 +20,8 @@
         </HBox>
     </top>
     <center>
-        <VBox fx:id="container">
+        <BorderPane fx:id="container">
             <padding><Insets topRightBottomLeft="30"/></padding>
-        </VBox>
+        </BorderPane>
     </center>
 </BorderPane>

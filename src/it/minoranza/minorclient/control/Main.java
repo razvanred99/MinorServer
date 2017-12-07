@@ -1,6 +1,8 @@
 package it.minoranza.minorclient.control;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import it.minoranza.commons.Station;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
@@ -16,8 +18,14 @@ public class Main implements Initializable {
     @FXML
     private VBox container;
 
+    @FXML
+    private JFXComboBox comboStations;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        comboStations.getItems().addAll(Station.OWM.getDescrizione(),Station.AW.getDescrizione());
+        comboStations.getSelectionModel().selectFirst();
 
     }
 

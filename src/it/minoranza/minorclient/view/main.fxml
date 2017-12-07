@@ -9,6 +9,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <BorderPane xmlns:fx="http://javafx.com/fx" fx:controller="it.minoranza.minorclient.control.Main">
     <padding>
         <Insets topRightBottomLeft="7"/>
@@ -17,6 +18,7 @@
         <HBox alignment="CENTER" spacing="30">
             <padding><Insets topRightBottomLeft="30"/></padding>
             <JFXTextField labelFloat="true" promptText="Città" fx:id="txfCity"/>
+            <JFXComboBox fx:id="comboStations"/>
             <JFXButton text="CERCA" style="-fx-background-color: dodgerblue" textFill="white" onAction="#search"/>
         </HBox>
     </top>

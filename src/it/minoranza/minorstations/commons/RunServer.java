@@ -1,5 +1,10 @@
 package it.minoranza.minorstations.commons;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import it.minoranza.commons.Request;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -28,7 +33,15 @@ public class RunServer {
             final Scanner scanner=new Scanner(in);
             final PrintWriter printWriter=new PrintWriter(out,true);
 
-            printWriter.println(abstractStation.getSugg(scanner.nextLine()));
+            final JSONObject request=new JSONObject(scanner.nextLine());
+
+            try{
+                printWriter.println(abstractStation.getSugg(request.getString(Request.values()[0].name())));
+            }catch(JSONException exc){
+                printWriter.println(abstractStation.getWeather(request.getString(Request.values()[1].name())));
+            }
+
+            printWriter.println();
 
             scanner.close();
             s.close();

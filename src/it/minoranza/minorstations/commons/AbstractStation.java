@@ -3,6 +3,7 @@ package it.minoranza.minorstations.commons;
 import it.minoranza.commons.Station;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,26 +17,25 @@ public abstract class AbstractStation {
 
     protected final Station station;
     protected final String API_KEY;
-    protected final String urlMain,urlLocation;
+    //protected final String urlMain,urlLocation;
 
-    protected AbstractStation(final Station station, final String API_KEY,final String urlMain,final String urlLocation){
+    protected AbstractStation(final Station station, final String API_KEY){
         this.API_KEY=API_KEY;
         this.station=station;
-        this.urlLocation=urlLocation;
-        this.urlMain=urlMain;
+
     }
 
     public final Station getStation() throws MalformedURLException{
         return station;
     }
 
-    public String request(final String city) throws IOException {
+    public String request(final String param,final String urlMain,final String urlTail) throws IOException {
 
         final StringBuilder build=new StringBuilder();
         build.append(urlMain);
         build.append(API_KEY);
-        build.append(urlLocation);
-        build.append(city);
+        build.append(urlTail);
+        build.append(param);
 
         URL url=new URL(build.toString().trim().replaceAll(" +", " ").replaceAll(" ","%20"));
 
@@ -60,5 +60,6 @@ public abstract class AbstractStation {
 
     public abstract JSONArray getSugg(final String query) throws IOException;
 
+    public abstract JSONObject getWeather(final String id) throws IOException;
 
 }

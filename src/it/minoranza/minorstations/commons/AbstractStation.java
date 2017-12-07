@@ -2,6 +2,7 @@ package it.minoranza.minorstations.commons;
 
 import it.minoranza.commons.Station;
 import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,7 +29,7 @@ public abstract class AbstractStation {
         return station;
     }
 
-    public String requestWeather(final String city) throws IOException {
+    public String request(final String city) throws IOException {
 
         final StringBuilder build=new StringBuilder();
         build.append(urlMain);
@@ -36,7 +37,10 @@ public abstract class AbstractStation {
         build.append(urlLocation);
         build.append(city);
 
-        URL url=new URL(build.toString().replaceAll(" ","%20"));
+        URL url=new URL(build.toString().trim().replaceAll(" +", " ").replaceAll(" ","%20"));
+
+        System.out.println(build.toString());
+
         HttpURLConnection connection = (HttpURLConnection)url.openConnection();
         connection.setRequestMethod("GET");
         connection.connect();
@@ -52,6 +56,9 @@ public abstract class AbstractStation {
         return reader.toString();
     }
 
+    public abstract JSONArray stardardizePlaces(final JSONArray array);
+
+    public abstract JSONArray getSugg(final String query) throws IOException;
 
 
 }

@@ -24,7 +24,7 @@ public class RunVirtualCommunication extends Thread {
     @Override
     public final void run() {
 
-        int i=0;
+        //int i=0;
 
         while(finish){
             try {
@@ -39,7 +39,8 @@ public class RunVirtualCommunication extends Thread {
 
                 //sleep(7000);
 
-                finish=i++<3;
+                //finish=i++<3;
+                finish=false;
 
                 //join();
                 //interrupt();

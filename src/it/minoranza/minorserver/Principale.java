@@ -1,50 +1,40 @@
 package it.minoranza.minorserver;
 
-import it.minoranza.minorserver.control.RunVirtualCommunication;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
-import java.net.ServerSocket;
 
 public class Principale extends Application {
 
-    private final int PORT=1024;
+    private final int PORT=7025;
 
     @Override
     public void start(final Stage primaryStage) throws IOException{
 
-        final Parent root = FXMLLoader.load(getClass().getResource("view/main.fxml"));
+        final FXMLLoader loader=new FXMLLoader(getClass().getResource("view/main.fxml"));
+        primaryStage.setScene(new Scene(loader.load(), 300, 275));
+        //final Main controller=loader.<Main>getController();
+
+
+        //final Thread thread=
+        //controller.attach(thread);
+
         primaryStage.setTitle("Cruscotto - MinorServer");
-        primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
 
-        final Thread thread=new Thread(() -> {
-            try {
-
-                ServerSocket ss=new ServerSocket(PORT);
-
-                new Thread(() -> {
-                    try{
-                        while (true) {
-                            new RunVirtualCommunication(ss.accept()).start();
-                        }
-                    }catch(IOException ioexc){
-                        ioexc.printStackTrace();
-                    }
-                }).start();
-
-
-            } catch (IOException exc) {
-                System.err.println("Errore di creazione del server");
-                exc.printStackTrace();
+        primaryStage.onCloseRequestProperty().addListener(new ChangeListener<EventHandler<WindowEvent>>() {
+            @Override
+            public void changed(ObservableValue<? extends EventHandler<WindowEvent>> observable, EventHandler<WindowEvent> oldValue, EventHandler<WindowEvent> newValue) {
+                System.exit(0);
             }
         });
-
-        thread.start();
 
     }
 

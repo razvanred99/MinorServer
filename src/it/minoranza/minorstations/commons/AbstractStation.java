@@ -25,11 +25,11 @@ public abstract class AbstractStation {
 
     }
 
-    public final Station getStation() throws MalformedURLException{
+    public final Station getStation(){
         return station;
     }
 
-    public String request(final String param,final String urlMain,final String urlTail) throws IOException {
+    protected String request(final String param,final String urlMain,final String urlTail) throws IOException {
 
         final StringBuilder build=new StringBuilder();
         build.append(urlMain);
@@ -37,23 +37,28 @@ public abstract class AbstractStation {
         build.append(urlTail);
         build.append(param);
 
-        URL url=new URL(build.toString().trim().replaceAll(" +", " ").replaceAll(" ","%20"));
+        final URL url=new URL(build.toString().trim().replaceAll(" +", " ").replaceAll(" ","%20"));
 
         System.out.println(build.toString());
 
-        HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+        final HttpURLConnection connection = (HttpURLConnection)url.openConnection();
         connection.setRequestMethod("GET");
         connection.connect();
 
         if(connection.getResponseCode()!=200) //città non trovata
             throw new IOException();
 
-        StringWriter reader= new StringWriter();
-        InputStream in=connection.getInputStream();
+        final StringWriter reader= new StringWriter();
+        final InputStream in=connection.getInputStream();
 
         IOUtils.copy(in,reader);
+        in.close();
 
-        return reader.toString();
+        final String buffer=reader.toString();
+        reader.close();
+        connection.disconnect();
+
+        return buffer;
     }
 
     public abstract JSONArray stardardizePlaces(final JSONArray array);
